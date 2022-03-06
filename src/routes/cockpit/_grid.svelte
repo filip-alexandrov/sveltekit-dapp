@@ -20,6 +20,11 @@
 	if (Device.isMobile == false) deviceComputer = true;
 
 	orientation = Viewport.Orientation;
+
+	function handleClickedOption(event) {
+		console.log('received in _grid');
+		alert('clicked');
+	}
 </script>
 
 <svelte:head>
@@ -44,7 +49,9 @@
 			<div class="item6">6</div>
 			<div class="item6">7</div>
 
-			<div class="left-up-nav"><slot name="left-up-nav">Loading...</slot></div>
+			<div class="left-up-nav">
+				<slot name="left-up-nav">Loading...</slot>
+			</div>
 			<div class="item7"><slot name="right-up-nav">Loading...</slot></div>
 
 			<div class="item7"><slot name="left-down-nav">Loading...</slot></div>
@@ -71,11 +78,10 @@
 		grid-template-columns: 7.5% auto auto auto auto auto 7.5%;
 		grid-template-rows: 3.5vh 55vh auto;
 		grid-gap: 1px;
-		background-color: #b5bdbe;
+		background-color: #fff;
 		box-sizing: border-box;
 
 		div {
-			background-color: #fff;
 			font-size: max(1vw, 15px);
 		}
 	}
@@ -92,16 +98,20 @@
 		grid-area: 2 / 2 / span 2 / span 5;
 	}
 	.left-up-nav {
+		font-size: max(1vw, 15px);
 		align-items: flex-start !important;
 		padding-left: 1px;
 		text-overflow: ellipsis;
 		overflow-x: hidden;
 		white-space: nowrap;
+		z-index: 1;
 
 		&::-webkit-scrollbar {
 			display: none;
 		}
 		-ms-overflow-style: none; /* IE and Edge */
 		scrollbar-width: none; /* Firefox */
+
+		background-color: #f0f5f6;
 	}
 </style>

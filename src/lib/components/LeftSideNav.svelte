@@ -1,9 +1,10 @@
 <script>
-	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	let clickedOption = '';
 	let options = [
 		'Indices',
+		'FX',
 		'Cryptocurrency',
 		'Shares',
 		'Commodities',
@@ -12,13 +13,34 @@
 		'Options'
 	];
 
-	/* 	onMount(() => {
-		let options = {};
-		let elems = document.querySelectorAll('.modal');
-		let instances = M.Modal.init(elems, options);
-		instances[0].open();
-	}); */
+	let popularToday = ['S&P500', 'Dow Jones', 'Apple', 'Tesla', 'Microsoft', 'Netflix'];
+
+	const dispatch = createEventDispatcher();
+	function openModal(clickedOption) {
+		dispatch('clicked-option', { clickedOption });
+		console.log('clicked in nav component');
+	}
 </script>
+
+<table class="highlight move-down">
+	<tbody>
+		<tr>
+			<td
+				on:click={() => {
+					if (clickedOption === 'Search') {
+						clickedOption = '';
+					} else {
+						clickedOption = 'Search';
+					}
+					openModal(clickedOption);
+				}}
+				class={clickedOption === 'Search' ? 'clicked' : ''}>Search <span class="right">🔍</span></td
+			>
+		</tr>
+	</tbody>
+</table>
+
+<hr />
 
 <table class="highlight">
 	<thead>
@@ -37,16 +59,52 @@
 						} else {
 							clickedOption = option;
 						}
+						openModal(clickedOption);
 					}}
-					class={clickedOption === option ? 'clicked' : ''}>{option}</td
-				>
+					class={clickedOption === option ? 'clicked' : ''}
+					>{option}
+				</td>
 			</tr>
 		{/each}
 	</tbody>
 </table>
 <hr />
 
+<table class="highlight">
+	<thead>
+		<tr>
+			<th>POPULAR</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{#each popularToday as popularName}
+			<tr>
+				<td
+					on:click={() => {
+						if (clickedOption === popularName) {
+							clickedOption = '';
+						} else {
+							clickedOption = popularName;
+						}
+						openModal(clickedOption);
+					}}
+					class={clickedOption === popularName ? 'clicked' : ''}
+				>
+					{popularName}</td
+				>
+			</tr>
+		{/each}
+	</tbody>
+</table>
+
 <style lang="scss">
+	.move-down {
+		margin-top: 2vh;
+	}
+	.right {
+		float: right;
+	}
 	table,
 	th,
 	td {
@@ -61,6 +119,12 @@
 			font-size: max(13px, 1.5vh);
 			font-family: 'Roboto Mono', monospace;
 			font-weight: 300;
+			white-space: nowrap;
+		}
+
+		span.percent-change {
+			color: green;
+			float: right;
 		}
 	}
 
@@ -71,7 +135,7 @@
 		border-spacing: 0;
 	}
 	hr {
-		border-bottom: 2px solid #b5bdbe;
+		border-bottom: 1px solid #b5bdbe;
 		border-radius: 0.5;
 		border-top: none;
 		width: 80%;
@@ -83,7 +147,7 @@
 	}
 
 	table.highlight > tbody > tr:hover {
-		background-color: #eaf1f2;
+		background-color: #ccd5d6;
 	}
 
 	td,

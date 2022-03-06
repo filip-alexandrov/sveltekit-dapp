@@ -1,5 +1,9 @@
+<script>
+	export let leftNavClickedOption;
+</script>
+
 <div>
-	<div class="modal">hey</div>
+	<div class="modal">{leftNavClickedOption}</div>
 </div>
 
 <style lang="scss">
