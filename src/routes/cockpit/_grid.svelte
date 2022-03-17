@@ -20,11 +20,6 @@
 	if (Device.isMobile == false) deviceComputer = true;
 
 	orientation = Viewport.Orientation;
-
-	function handleClickedOption(event) {
-		console.log('received in _grid');
-		alert('clicked');
-	}
 </script>
 
 <svelte:head>
@@ -77,7 +72,7 @@
 		display: grid;
 		grid-template-columns: 7.5% auto auto auto auto auto 7.5%;
 		grid-template-rows: 3.5vh 55vh auto;
-		grid-gap: 1px;
+		grid-gap: 0px;
 		background-color: #fff;
 		box-sizing: border-box;
 

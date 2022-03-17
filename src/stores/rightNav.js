@@ -9,6 +9,4 @@ const fetchTickers = async () => {
 	tickers.set(data);
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-await fetchTickers();
+fetchTickers();

@@ -7,27 +7,42 @@
 	import { fly, slide } from 'svelte/transition';
 	import { linear } from 'svelte/easing';
 	import Viewport from 'svelte-viewport-info';
+	import MainLayout2 from '$lib/components/MainLayout2.svelte';
 
 	let screenWidth = Viewport.Width;
 	let leftExpandedMenu = screenWidth * 0.4;
 
-	console.log($tickers);
-
 	let leftNavClickedOption = '';
+	let tickerClicked = '';
+
 	function handleClickedOption(event) {
-		if (leftNavClickedOption == event.detail.clickedOption) {
-			leftNavClickedOption = '';
-		} else {
-			leftNavClickedOption = event.detail.clickedOption;
-		}
+		// will be '' on second click
+		leftNavClickedOption = event.detail.clickedOption;
+		tickerClicked = '';
+	}
+
+	function handleTickerClicked(event) {
+		tickerClicked = event.detail.tickerClicked;
 	}
 </script>
 
 <Grid>
 	<div class="under-leftmenu" slot="main-layout">
 		{#if leftNavClickedOption != ''}
-			<div in:fly={{ x: -leftExpandedMenu, duration: 150, opacity: 1, easing: linear }}>
-				<MainLayout {leftNavClickedOption} />
+			<div
+				style="display: inline-block;"
+				in:fly={{ x: -leftExpandedMenu, duration: 150, opacity: 1, easing: linear }}
+			>
+				<MainLayout {leftNavClickedOption} on:clicked-ticker={handleTickerClicked} />
+			</div>
+		{/if}
+
+		{#if tickerClicked != ''}
+			<div
+				style="display: inline;"
+				in:fly={{ x: -leftExpandedMenu, duration: 150, opacity: 1, easing: linear }}
+			>
+				<MainLayout2 />
 			</div>
 		{/if}
 	</div>
@@ -35,6 +50,3 @@
 		<LeftSideNav on:clicked-option={handleClickedOption} />
 	</div>
 </Grid>
-
-<style>
-</style>

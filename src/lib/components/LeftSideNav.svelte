@@ -18,7 +18,6 @@
 	const dispatch = createEventDispatcher();
 	function openModal(clickedOption) {
 		dispatch('clicked-option', { clickedOption });
-		console.log('clicked in nav component');
 	}
 </script>
 
