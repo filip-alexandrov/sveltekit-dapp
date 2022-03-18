@@ -4,6 +4,8 @@
 </script>
 
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	let devicePhone: boolean = false;
 	let deviceComputer: boolean = false;
 	let deviceTablet: boolean = false;
@@ -11,6 +13,7 @@
 
 	switch (true) {
 		case Device.isPhone:
+			goto('/mobile');
 			devicePhone = true;
 			break;
 		case Device.isTablet:

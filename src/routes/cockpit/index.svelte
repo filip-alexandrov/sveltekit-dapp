@@ -38,12 +38,7 @@
 		{/if}
 
 		{#if tickerClicked != ''}
-			<div
-				style="display: inline;"
-				in:fly={{ x: -leftExpandedMenu, duration: 150, opacity: 1, easing: linear }}
-			>
-				<MainLayout2 />
-			</div>
+			<MainLayout2 {tickerClicked} />
 		{/if}
 	</div>
 	<div class="above-expanded" slot="left-up-nav">

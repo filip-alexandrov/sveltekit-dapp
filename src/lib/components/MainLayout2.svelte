@@ -1,7 +1,11 @@
 <script>
+	import { onDestroy, onMount } from 'svelte';
+
 	import TradingViewWidget from 'svelte-tradingview-widget';
-	let TWoptions = {
-		symbol: 'BINANCE:BTCUSDT',
+
+	export let tickerClicked;
+	$: TWoptions = {
+		symbol: tickerClicked,
 		theme: 'light',
 		autosize: true,
 		locale: 'en',
@@ -9,6 +13,10 @@
 		allow_symbol_change: false,
 		details: true
 	};
+
+	onDestroy(() => {
+		console.log('destroyed');
+	});
 
 	let clickedOption = '';
 	let tradingOptions = ['Deal', 'Order', 'Alert', 'Info'];
@@ -23,10 +31,12 @@
 </script>
 
 <div class="modal2">
-	<div class="title">Check</div>
+	<div class="title">{tickerClicked}</div>
 	<div class="info-container">
 		<div class="trading-view">
-			<TradingViewWidget options={TWoptions} />
+			{#if TWoptions}
+				<TradingViewWidget options={TWoptions} />
+			{/if}
 		</div>
 		<div class="trading-control">
 			<!-- <table class="table highlight">

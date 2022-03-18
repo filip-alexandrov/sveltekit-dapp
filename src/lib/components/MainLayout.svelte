@@ -7,28 +7,28 @@
 	let clickedTicker = '';
 	let tickers = [
 		{
-			name: 'Germany 40',
+			name: 'DAX',
 			sellPrice: '13550.3',
 			buyPrice: '13552.3 ',
 			change: '111.5',
 			percentChange: '0.83'
 		},
 		{
-			name: 'US Tech 100',
+			name: 'NASDAQ COMPOSITE',
 			sellPrice: '13580.6 ',
 			buyPrice: '13581.6 ',
 			change: '-159.3',
 			percentChange: '-1.16'
 		},
 		{
-			name: 'Germany 40',
+			name: 'US 30',
 			sellPrice: '13550.3',
 			buyPrice: '13552.3 ',
 			change: '111.5',
 			percentChange: '0.83'
 		},
 		{
-			name: 'Germany 40',
+			name: 'S&P 500',
 			sellPrice: '13550.3',
 			buyPrice: '13552.3 ',
 			change: '111.5',
